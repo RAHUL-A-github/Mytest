@@ -35,6 +35,7 @@ class _Home_PageState extends State<Home_Page>
     Firebase.initializeApp();
     _getUserEmail();
     tabController = TabController(length: 4, vsync: this);
+
   }
 
   _getUserEmail() async {
@@ -172,7 +173,6 @@ class _Home_PageState extends State<Home_Page>
                       fontSize: 35.0,
                       fontFamily: 'OpenSans'),
                 ),
-                // ignore: deprecated_member_use
                 FlatButton.icon(
                     onPressed: () async {
                       await _logOut();
@@ -187,6 +187,7 @@ class _Home_PageState extends State<Home_Page>
                       'Logout',
                       style: TextStyle(color: Colors.white),
                     )),
+
               ],
             ),
           ),

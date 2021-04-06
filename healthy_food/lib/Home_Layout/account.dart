@@ -144,10 +144,5 @@ class _UserPrefrencesState extends State<UserPrefrences> {
       // ),
     );
   }
-  /*Future<List<UserData>> getUserDataByUId(String uid)async{
-    DocumentSnapshot documentSnapshot=await users.doc(uid).get();
-
-  }*/
-
 }
 

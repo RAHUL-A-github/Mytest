@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:healthy_food/Home_Layout/MyHomePage.dart';
 import 'package:email_validator/email_validator.dart';
+import 'package:healthy_food/Home_Layout/widget/forgetpassword.dart';
 import 'package:healthy_food/Home_Layout/widget/loading.dart';
 import 'package:healthy_food/Sign_up/sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -61,6 +62,8 @@ class _login_FormState extends State<login_Form> {
               backgroundColor: Colors.transparent,
               body: SingleChildScrollView(
                 child: Container(
+                  height: MediaQuery.of(context).size.height,
+                  width: MediaQuery.of(context).size.width,
                   child: Padding(
                     padding: EdgeInsets.all(36.0),
                     child: Column(
@@ -142,7 +145,21 @@ class _login_FormState extends State<login_Form> {
                             ),
                           ),
                         ),
-                        SizedBox(height: 25.0),
+                        SizedBox(height: 5.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.end,
+                          children: [
+                            InkWell(
+                              onTap: (){
+                                Navigator.of(context).push(
+                                    MaterialPageRoute(builder: (context) => ForgetPassword()));
+                              },
+                              child: SizedBox(
+                                height: 30,child: Text('Forget Password'),
+                              ),
+                            ),
+                          ],
+                        ),
                         Material(
                           elevation: 5.0,
                           borderRadius: BorderRadius.circular(30.0),
@@ -245,6 +262,7 @@ class _login_FormState extends State<login_Form> {
         print('Log In Successfully......');
         _setUserEmail(email);
       }
+
     } catch (e) {
       setState(() => active = false);
       switch (e.code) {
@@ -274,5 +292,6 @@ class _login_FormState extends State<login_Form> {
           break;
       }
     }
+
   }
 }

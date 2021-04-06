@@ -64,6 +64,8 @@ class _Sign_in_pageState extends State<Sign_in_page> {
         backgroundColor: Colors.transparent,
         body: SingleChildScrollView(
           child: Container(
+            height: MediaQuery.of(context).size.height,
+            width: MediaQuery.of(context).size.width,
             child: Padding(
               padding: EdgeInsets.only(left: 10.0, top: 10.0, right: 10.0),
               child: Column(
@@ -148,11 +150,11 @@ class _Sign_in_pageState extends State<Sign_in_page> {
                       controller: name,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                          suffixIcon: InkWell(
-                              child: Icon(Icons.clear_all),
-                              onTap: () {
-                                name.text = '';
-                              }),
+                          // suffixIcon: InkWell(
+                          //     child: Icon(Icons.clear_all),
+                          //     onTap: () {
+                          //       name.text = '';
+                          //     }),
                           contentPadding:
                               EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
                           labelText: 'Name',
@@ -178,11 +180,11 @@ class _Sign_in_pageState extends State<Sign_in_page> {
                       controller: lname,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                          suffixIcon: InkWell(
-                              child: Icon(Icons.clear_all),
-                              onTap: () {
-                                lname.text = '';
-                              }),
+                          // suffixIcon: InkWell(
+                          //     child: Icon(Icons.clear_all),
+                          //     onTap: () {
+                          //       lname.text = '';
+                          //     }),
                           contentPadding:
                               EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
                           labelText: 'Last Name',
@@ -207,11 +209,11 @@ class _Sign_in_pageState extends State<Sign_in_page> {
                       controller: email,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                          suffixIcon: InkWell(
-                              child: Icon(Icons.clear_all),
-                              onTap: () {
-                                email.text = '';
-                              }),
+                          // suffixIcon: InkWell(
+                          //     child: Icon(Icons.clear_all),
+                          //     onTap: () {
+                          //       email.text = '';
+                          //     }),
                           contentPadding:
                               EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
                           labelText: 'E-mail',
@@ -274,11 +276,11 @@ class _Sign_in_pageState extends State<Sign_in_page> {
                       style: TextStyle(fontSize: 18.0),
                       controller: confirm_password,
                       decoration: InputDecoration(
-                        suffixIcon: InkWell(
-                            child: Icon(Icons.clear_all),
-                            onTap: () {
-                              email.text = '';
-                            }),
+                        // suffixIcon: InkWell(
+                        //     child: Icon(Icons.clear_all),
+                        //     onTap: () {
+                        //       email.text = '';
+                        //     }),
                         contentPadding:
                             EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
                         labelText: 'Re-password',
@@ -307,11 +309,11 @@ class _Sign_in_pageState extends State<Sign_in_page> {
                       style: TextStyle(fontSize: 18.0),
                       controller: numController,
                       decoration: InputDecoration(
-                        suffixIcon: InkWell(
-                            child: Icon(Icons.clear_all),
-                            onTap: () {
-                              numController.text = '';
-                            }),
+                        // suffixIcon: InkWell(
+                        //     child: Icon(Icons.clear_all),
+                        //     onTap: () {
+                        //       numController.text = '';
+                        //     }),
                         contentPadding:
                             EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
                         labelText: 'Mobile No.',

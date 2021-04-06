@@ -11,6 +11,7 @@ class DetailsPage extends StatefulWidget {
 
 class _DetailsPageState extends State<DetailsPage> {
   var selectedCard = 'WEIGHT';
+  int count = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +33,6 @@ class _DetailsPageState extends State<DetailsPage> {
           style: TextStyle(fontSize: 20.0, color: Colors.white),
         ),
         centerTitle: true,
-
       ),
       body: ListView(
         children: [
@@ -106,7 +106,28 @@ class _DetailsPageState extends State<DetailsPage> {
                             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                             children: [
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+                                  setState(() {
+                                    if (count > 1) {
+                                      count = count - 1;
+                                      print(count);
+                                    }
+                                    // else {
+                                    //   final snackBar = SnackBar(
+                                    //     duration: Duration(milliseconds: 1000),
+                                    //     backgroundColor: Colors.red,
+                                    //     content: Text('Select atleast 1 item'),
+                                    //     action: SnackBarAction(
+                                    //       label: 'warning',
+                                    //       textColor: Colors.white,
+                                    //       onPressed: () {},
+                                    //     ),
+                                    //   );
+                                    //   ScaffoldMessenger.of(context)
+                                    //       .showSnackBar(snackBar);
+                                    // }
+                                  });
+                                },
                                 child: Container(
                                   height: 25.0,
                                   width: 25.0,
@@ -122,12 +143,34 @@ class _DetailsPageState extends State<DetailsPage> {
                                 ),
                               ),
                               Text(
-                                '1',
+                                "$count",
                                 style: TextStyle(
                                     fontSize: 15.0, color: Colors.white),
                               ),
                               InkWell(
-                                onTap: () {},
+                                onTap: () {
+
+                                    setState(() {
+                                      if (count < 5) {
+                                        count = count + 1;
+                                        print(count);
+                                      }
+                                      //ion(milliseconds: 1000),
+                                      //     backgroundColor: Colors.red,
+                                      //     content: Text(
+                                      //         'No More Item to be selected'),
+                                      //     action: SnackBarAction(
+                                      //       label: 'warning',
+                                      //       textColor: Colors.white,
+                                      //       onPressed: () {},
+                                      //     ),
+                                      //   );
+                                      //   ScaffoldMessenger.of(context)
+                                      //       .showSnackBar(snackBar);
+                                      // }
+                                    });
+
+                                },
                                 child: Container(
                                   height: 25.0,
                                   width: 25.0,

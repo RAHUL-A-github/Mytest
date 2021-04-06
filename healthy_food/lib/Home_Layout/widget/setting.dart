@@ -9,6 +9,7 @@ class SettingPage extends StatefulWidget {
 class _SettingPageState extends State<SettingPage> {
   bool lockInBackground = true;
   bool notificationsEnabled = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
