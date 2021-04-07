@@ -14,19 +14,15 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
-// ignore: camel_case_types
-class Sign_in_page extends StatefulWidget {
+class SignInPage extends StatefulWidget {
   @override
-  _Sign_in_pageState createState() => _Sign_in_pageState();
+  _SignInPageState createState() => _SignInPageState();
 }
-
 void _setUserEmail(String useremail) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   pref.setString('userEmail', useremail);
 }
-
-// ignore: camel_case_types
-class _Sign_in_pageState extends State<Sign_in_page> {
+class _SignInPageState extends State<SignInPage> {
 
   String _name, _lname, _email, _userImage, _uId, _mobile;
   File _image;
@@ -358,7 +354,7 @@ class _Sign_in_pageState extends State<Sign_in_page> {
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
                                         builder: (context) =>
-                                            Home_Page()));
+                                            HomePage()));
                                 String email = _email;
                                 print(user.uid);
                                 print(user.email);
@@ -524,8 +520,5 @@ class _Sign_in_pageState extends State<Sign_in_page> {
         profileImageUrl = await putImage(context);
         await addData();
       }
-
-
-
   }
 }

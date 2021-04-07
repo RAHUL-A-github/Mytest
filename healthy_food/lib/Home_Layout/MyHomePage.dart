@@ -12,16 +12,15 @@ import 'package:healthy_food/Home_Layout/widget/vagitables.dart';
 import 'package:healthy_food/Login/Login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// ignore: camel_case_types
-class Home_Page extends StatefulWidget {
+class HomePage extends StatefulWidget {
   @override
-  _Home_PageState createState() => _Home_PageState();
+  _HomePageState createState() => _HomePageState();
 }
 
-// ignore: camel_case_types
-class _Home_PageState extends State<Home_Page>
+class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   TabController tabController;
+
   //used in shared_preferences
   String userEmail;
   DocumentReference userRef;
@@ -29,13 +28,13 @@ class _Home_PageState extends State<Home_Page>
   // used in firebase current user
   String useremail, username, userimage, uid;
   var scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   void initState() {
     super.initState();
     Firebase.initializeApp();
     _getUserEmail();
     tabController = TabController(length: 4, vsync: this);
-
   }
 
   _getUserEmail() async {
@@ -85,9 +84,10 @@ class _Home_PageState extends State<Home_Page>
                       return ListView(
                           children: documents
                               .map(
-                                (doc) => UserAccountsDrawerHeader(
+                                (doc) =>
+                                UserAccountsDrawerHeader(
                                   decoration: BoxDecoration(
-                                    color: Colors.purpleAccent,
+                                    color: Colors.blue,
                                     borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(60.0),
                                       bottomRight: Radius.circular(60.0),
@@ -105,7 +105,7 @@ class _Home_PageState extends State<Home_Page>
                                     backgroundImage: NetworkImage(doc['image']),
                                   ),
                                 ),
-                              )
+                          )
                               .toList());
                     }
                   },
@@ -113,42 +113,42 @@ class _Home_PageState extends State<Home_Page>
               ),
               Expanded(
                   child: ListView(
-                children: [
-                  ListTile(
-                    title: Text(
-                      'Account',
-                      style: TextStyle(fontFamily: 'OpenSans'),
-                    ),
-                    leading: Icon(Icons.account_circle),
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => UserAccountPage()));
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Notification',
-                      style: TextStyle(fontFamily: 'OpenSans'),
-                    ),
-                    leading: Icon(Icons.notifications),
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => Notificationspage()));
-                    },
-                  ),
-                  ListTile(
-                    title: Text(
-                      'Setting',
-                      style: TextStyle(fontFamily: 'OpenSans'),
-                    ),
-                    leading: Icon(Icons.settings),
-                    onTap: () {
-                      Navigator.of(context).push(MaterialPageRoute(
-                          builder: (context) => SettingPage()));
-                    },
-                  ),
-                ],
-              ))
+                    children: [
+                      ListTile(
+                        title: Text(
+                          'Account',
+                          style: TextStyle(fontFamily: 'OpenSans'),
+                        ),
+                        leading: Icon(Icons.account_circle),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => UserAccountPage()));
+                        },
+                      ),
+                      ListTile(
+                        title: Text(
+                          'Notification',
+                          style: TextStyle(fontFamily: 'OpenSans'),
+                        ),
+                        leading: Icon(Icons.notifications),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => Notificationspage()));
+                        },
+                      ),
+                      ListTile(
+                        title: Text(
+                          'Setting',
+                          style: TextStyle(fontFamily: 'OpenSans'),
+                        ),
+                        leading: Icon(Icons.settings),
+                        onTap: () {
+                          Navigator.of(context).push(MaterialPageRoute(
+                              builder: (context) => SettingPage()));
+                        },
+                      ),
+                    ],
+                  ))
             ],
           ),
         ),
@@ -173,7 +173,7 @@ class _Home_PageState extends State<Home_Page>
                       fontSize: 35.0,
                       fontFamily: 'OpenSans'),
                 ),
-                FlatButton.icon(
+                TextButton.icon(
                     onPressed: () async {
                       await _logOut();
                     },
@@ -182,7 +182,7 @@ class _Home_PageState extends State<Home_Page>
                       color: Colors.white,
                     ),
                     //hoverColor: Colors.black,
-                    highlightColor: Colors.black,
+
                     label: Text(
                       'Logout',
                       style: TextStyle(color: Colors.white),
@@ -245,13 +245,19 @@ class _Home_PageState extends State<Home_Page>
           SizedBox(height: 10.0),
           Container(
             padding: EdgeInsets.only(top: 70.0),
-            height: MediaQuery.of(context).size.height - 182.0,
+            height: MediaQuery
+                .of(context)
+                .size
+                .height - 182.0,
             decoration: BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(topLeft: Radius.circular(75.0)),
             ),
             child: Container(
-              height: MediaQuery.of(context).size.height - 300.0,
+              height: MediaQuery
+                  .of(context)
+                  .size
+                  .height - 300.0,
               child: TabBarView(controller: tabController, children: <Widget>[
                 Drinks(),
                 Vagitable(),
@@ -264,63 +270,4 @@ class _Home_PageState extends State<Home_Page>
       ),
     );
   }
-
-// ignore: missing_return
-//   Widget _buildFoodItem(String imgPath, String foodName, String foodPrice) {
-//     return Padding(
-//       padding: EdgeInsets.only(left: 10.0, right: 10.0, top: 10.0),
-//       child: InkWell(
-//         onTap: () {
-//           Navigator.of(context).push(MaterialPageRoute(
-//               builder: (context) => DetailsPage(
-//                   heroTag: imgPath, foodName: foodName, foodPrice: foodPrice)));
-//         },
-//         child: Row(
-//           mainAxisAlignment: MainAxisAlignment.spaceBetween,
-//           children: [
-//             Container(
-//               child: Row(
-//                 children: [
-//                   Hero(
-//                     tag: imgPath,
-//                     child: Image(
-//                         image: AssetImage(imgPath),
-//                         fit: BoxFit.cover,
-//                         height: 75.0,
-//                         width: 75.0),
-//                   ),
-//                   SizedBox(width: 10.0),
-//                   Column(
-//                     crossAxisAlignment: CrossAxisAlignment.start,
-//                     children: [
-//                       Text(
-//                         foodName,
-//                         style: TextStyle(
-//                             fontSize: 17.0, fontWeight: FontWeight.bold),
-//                       ),
-//                       Text(
-//                         foodPrice,
-//                         style: TextStyle(fontSize: 15.0, color: Colors.grey),
-//                       ),
-//                     ],
-//                   ),
-//                 ],
-//               ),
-//             ),
-//             IconButton(
-//               icon: Icon(Icons.add),
-//               color: Colors.black,
-//               onPressed: () {
-//                 Navigator.of(context).push(MaterialPageRoute(
-//                     builder: (context) => DetailsPage(
-//                         heroTag: imgPath,
-//                         foodName: foodName,
-//                         foodPrice: foodPrice)));
-//               },
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
 }

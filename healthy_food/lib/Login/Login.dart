@@ -23,7 +23,7 @@ class _Login_PageState extends State<Login_Page> {
     return Scaffold(
       backgroundColor: Colors.white,
       resizeToAvoidBottomInset: true,
-      body: login_Form(),
+      body: LoginForm(),
     );
   }
 }

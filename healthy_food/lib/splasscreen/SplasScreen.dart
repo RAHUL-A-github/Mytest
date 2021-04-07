@@ -82,7 +82,7 @@ class _SplashScreenState extends State<SplashScreen>
       if (status == AnimationStatus.completed) {
         if (userEmail != null) {
           Navigator.of(context).pushReplacement(
-              MaterialPageRoute(builder: (context) => Home_Page()));
+              MaterialPageRoute(builder: (context) => HomePage()));
         } else {
           // Navigator.of(context).pushReplacement(
           //     MaterialPageRoute(builder: (context) => Login()));

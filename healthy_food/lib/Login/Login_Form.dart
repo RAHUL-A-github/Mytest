@@ -8,19 +8,16 @@ import 'package:healthy_food/Sign_up/sign_in.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// ignore: camel_case_types
-class login_Form extends StatefulWidget {
+class LoginForm extends StatefulWidget {
   @override
-  _login_FormState createState() => _login_FormState();
+  _LoginFormState createState() => _LoginFormState();
 }
-
 void _setUserEmail(String useremail) async {
   SharedPreferences pref = await SharedPreferences.getInstance();
   pref.setString('userEmail', useremail);
 }
-
 // ignore: camel_case_types
-class _login_FormState extends State<login_Form> {
+class _LoginFormState extends State<LoginForm> {
   bool active = false;
   //FlutterOtp otp = FlutterOtp();
   TextEditingController username = TextEditingController();
@@ -106,11 +103,6 @@ class _login_FormState extends State<login_Form> {
                           style: TextStyle(fontSize: 18.0),
                           obscureText: false,
                           decoration: InputDecoration(
-                            suffixIcon: InkWell(
-                                child: Icon(Icons.clear_all),
-                                onTap: () {
-                                  username.text = '';
-                                }),
                             prefixIcon: Icon(Icons.email),
                             contentPadding:
                                 EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
@@ -151,6 +143,7 @@ class _login_FormState extends State<login_Form> {
                           children: [
                             InkWell(
                               onTap: (){
+
                                 Navigator.of(context).push(
                                     MaterialPageRoute(builder: (context) => ForgetPassword()));
                               },
@@ -198,11 +191,12 @@ class _login_FormState extends State<login_Form> {
                             ),
                           ),
                         ),
+                        SizedBox(height: 10,),
                         Text(
                           'or',
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold),
                         ),
-                        SizedBox(height: 5.0),
+                        SizedBox(height: 10),
                         Material(
                           elevation: 5.0,
                           borderRadius: BorderRadius.circular(30.0),
@@ -214,7 +208,7 @@ class _login_FormState extends State<login_Form> {
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (context) => sign_in()));
+                                      builder: (context) => SignIn()));
                             },
                             child: Text(
                               'Sign up',
@@ -255,14 +249,13 @@ class _login_FormState extends State<login_Form> {
           .user;
       if (user != null) {
         Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => Home_Page()));
+            MaterialPageRoute(builder: (context) => HomePage()));
         String email = username.text;
         print(user.uid);
         print(user.email);
         print('Log In Successfully......');
         _setUserEmail(email);
       }
-
     } catch (e) {
       setState(() => active = false);
       switch (e.code) {
@@ -292,6 +285,5 @@ class _login_FormState extends State<login_Form> {
           break;
       }
     }
-
   }
 }

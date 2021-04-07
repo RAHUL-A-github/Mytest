@@ -112,20 +112,6 @@ class _DetailsPageState extends State<DetailsPage> {
                                       count = count - 1;
                                       print(count);
                                     }
-                                    // else {
-                                    //   final snackBar = SnackBar(
-                                    //     duration: Duration(milliseconds: 1000),
-                                    //     backgroundColor: Colors.red,
-                                    //     content: Text('Select atleast 1 item'),
-                                    //     action: SnackBarAction(
-                                    //       label: 'warning',
-                                    //       textColor: Colors.white,
-                                    //       onPressed: () {},
-                                    //     ),
-                                    //   );
-                                    //   ScaffoldMessenger.of(context)
-                                    //       .showSnackBar(snackBar);
-                                    // }
                                   });
                                 },
                                 child: Container(
@@ -155,19 +141,6 @@ class _DetailsPageState extends State<DetailsPage> {
                                         count = count + 1;
                                         print(count);
                                       }
-                                      //ion(milliseconds: 1000),
-                                      //     backgroundColor: Colors.red,
-                                      //     content: Text(
-                                      //         'No More Item to be selected'),
-                                      //     action: SnackBarAction(
-                                      //       label: 'warning',
-                                      //       textColor: Colors.white,
-                                      //       onPressed: () {},
-                                      //     ),
-                                      //   );
-                                      //   ScaffoldMessenger.of(context)
-                                      //       .showSnackBar(snackBar);
-                                      // }
                                     });
 
                                 },
@@ -196,7 +169,7 @@ class _DetailsPageState extends State<DetailsPage> {
                       child: ListView(
                         scrollDirection: Axis.horizontal,
                         children: [
-                          _buildInfoCard('WEIGHT', '300', 'G'),
+                          _buildInfoCard('SUGAR', '300', 'G'),
                           SizedBox(
                             width: 10.0,
                           ),
@@ -226,7 +199,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         ),
                         child: Center(
                           child: Text(
-                            widget.foodPrice,
+                            'Order',
                             style: TextStyle(color: Colors.white),
                           ),
                         ),

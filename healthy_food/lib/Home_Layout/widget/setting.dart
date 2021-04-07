@@ -1,5 +1,11 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:healthy_food/model/usermodel.dart';
+
+import 'dialogbox.dart';
 
 class SettingPage extends StatefulWidget {
   @override
@@ -7,12 +13,16 @@ class SettingPage extends StatefulWidget {
 }
 
 class _SettingPageState extends State<SettingPage> {
-  bool lockInBackground = true;
+  String _firebaseAuth = FirebaseAuth.instance.currentUser.uid;
+  CollectionReference users = FirebaseFirestore.instance.collection('users');
+  bool active = false;
   bool notificationsEnabled = true;
+  String deleteMail;
+  bool svalue = false;
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return active ? AccountDelete(deleteMail):Scaffold(
       appBar: AppBar(
         title: Text('Setting'),
       ),
@@ -21,102 +31,132 @@ class _SettingPageState extends State<SettingPage> {
   }
 
   buildSettingsList() {
-    return SettingsList(
-      contentPadding: EdgeInsets.only(top: 10.0),
-      sections: [
-        SettingsSection(
-          title: 'Common',
-          tiles: [
-            SettingsTile(
-              title: 'Language',
-              subtitle: 'English',
-              leading: Icon(Icons.language),
-              onPressed: (context) {
-                // Navigator.of(context).push(MaterialPageRoute(
-                //   builder: (_) => LanguagesScreen(),
-                // ));
-              },
-            ),
-            // SettingsTile(
-            //   title: 'Environment',
-            //   subtitle: 'Production',
-            //   leading: Icon(Icons.cloud_queue),
-            // ),
-          ],
-        ),
-        SettingsSection(
-          title: 'Account',
-          tiles: [
-            SettingsTile(title: 'Phone number', leading: Icon(Icons.phone)),
-            SettingsTile(title: 'Email', leading: Icon(Icons.email)),
-            SettingsTile(title: 'Sign out', leading: Icon(Icons.exit_to_app)),
-          ],
-        ),
-        SettingsSection(
-          title: 'Security',
-          tiles: [
-            SettingsTile.switchTile(
-              title: 'Lock app in background',
-              leading: Icon(Icons.phonelink_lock),
-              switchValue: lockInBackground,
-              onToggle: (bool value) {
-                setState(() {
-                  lockInBackground = value;
-                  notificationsEnabled = value;
-                });
-              },
-            ),
-            // SettingsTile.switchTile(
-            //     title: 'Use fingerprint',
-            //     subtitle: 'Allow application to access stored fingerprint IDs.',
-            //     leading: Icon(Icons.fingerprint),
-            //     onToggle: (bool value) {},
-            //     switchValue: false),
-            SettingsTile.switchTile(
-              title: 'Change password',
-              leading: Icon(Icons.lock),
-              switchValue: true,
-              onToggle: (bool value) {},
-            ),
-            SettingsTile.switchTile(
-              title: 'Enable Notifications',
-              enabled: notificationsEnabled,
-              leading: Icon(Icons.notifications_active),
-              switchValue: true,
-              onToggle: (value) {},
-            ),
-          ],
-        ),
-        SettingsSection(
-          title: 'Misc',
-          tiles: [
-            SettingsTile(
-                title: 'Terms of Service', leading: Icon(Icons.description)),
-            SettingsTile(
-                title: 'Open source licenses',
-                leading: Icon(Icons.collections_bookmark)),
-          ],
-        ),
-        CustomSection(
-          child: Column(
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(top: 25, bottom: 8),
-                child: Image.asset(
-                  'assets/images/settings.png',
-                  height: 40,
-                  width: 40,
-                  color: Color(0xFF777777),
-                ),
+    return Container(
+      child: FutureBuilder(
+          future: users.doc(_firebaseAuth).get(),
+          // ignore: missing_return
+          builder: (context, snapshot) {
+            if(snapshot.connectionState == ConnectionState.waiting)
+              return Center(child: CircularProgressIndicator());
+            if(snapshot.connectionState == ConnectionState.done){
+              Map<String, dynamic> data = snapshot.data.data();
+              UserData userData = UserData.fromJson(data);
+            return Container(
+              child: SettingsList(
+                contentPadding: EdgeInsets.only(top: 10.0),
+                sections: [
+                  SettingsSection(
+                    title: 'Account',
+                    tiles: [
+                      SettingsTile(
+                        title: userData.name,
+                        leading: Icon(Icons.person)
+                        , onTap: () {
+
+
+                      },),
+                      SettingsTile(
+                        title: userData.mobileNumber,
+                        leading: Icon(Icons.phone),
+                        onTap: (){
+
+                        },
+                      ),
+                      SettingsTile(
+                          title: userData.email,
+                          leading: Icon(Icons.email),
+                          onTap: () {
+
+
+                          }),
+                    ],
+                  ),
+                  SettingsSection(
+                    title: 'Security',
+                    tiles: [
+                      SettingsTile.switchTile(
+                        title: 'Enable Notifications',
+                        enabled: notificationsEnabled,
+                        leading: Icon(Icons.notifications_active),
+                        switchValue: svalue,
+                        onToggle: (value) {
+                          setState(() {
+                            if (svalue == true) {
+                              svalue = false;
+                            } else {
+                              svalue = true;
+                            }
+                          });
+                        },
+                      ),
+                      SettingsTile(
+                          onTap: () {
+                            deleteMail =
+                                FirebaseAuth.instance.currentUser.email;
+                            setState(() async {
+                              SharedPreferences pref = await SharedPreferences
+                                  .getInstance();
+                              pref.clear();
+                              print('Account Deleted Successfully........');
+                              active = true;
+                            });
+
+                            deleteuser();
+                          },
+                          title: 'Delete Account',
+                          leading: Icon(Icons.delete_forever)),
+                    ],
+                  ),
+                  SettingsSection(
+                    title: 'Misc',
+                    tiles: [
+                      SettingsTile(
+                          title: 'Terms of Service',
+                          leading: Icon(Icons.description),
+                          onTap: () {
+
+
+                          }),
+                      SettingsTile(
+                          title: 'Open source licenses',
+                          leading: Icon(Icons.collections_bookmark),
+                          onTap: () {
+
+
+                          }),
+                    ],
+                  ),
+                  CustomSection(
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: const EdgeInsets.only(top: 180, bottom: 5),
+                          child: Image.asset(
+                            'assets/images/settings.png',
+                            height: 40,
+                            width: 40,
+                            color: Color(0xFF777777),
+                          ),
+                        ),
+                        Text(
+                          'Version: 1',style: TextStyle(color: Color(0xFF777777)),
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
               ),
-              Text(
-                'Version: 2.4.0 (287)',
-                style: TextStyle(color: Color(0xFF777777)),
-              ),
-            ],
-          ),
-        ),
-      ],
+            );
+          }
+            return Text('');
+          }
+      ),
     );
+  }
+  final CollectionReference userCollection =
+  FirebaseFirestore.instance.collection('users');
+  void deleteuser() {
+    userCollection.doc(FirebaseAuth.instance.currentUser.uid).delete();
+    FirebaseAuth.instance.currentUser.delete();
   }
 }

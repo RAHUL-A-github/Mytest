@@ -9,7 +9,7 @@ class UserData {
 
   UserData.fromJson(Map<String, dynamic> json) {
     email = json['email'];
-    mobileNumber = json['mobile_number'];
+    mobileNumber = json['Mobile'];
     lname = json['lname'];
     name = json['name'];
     image = json['image'];
@@ -18,7 +18,7 @@ class UserData {
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = new Map<String, dynamic>();
     data['email'] = this.email;
-    data['mobile_number'] = this.mobileNumber;
+    data['Mobile'] = this.mobileNumber;
     data['lname'] = this.lname;
     data['name'] = this.name;
     data['image'] = this.image;

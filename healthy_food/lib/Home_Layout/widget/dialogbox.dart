@@ -1,31 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:healthy_food/Login/Login.dart';
+// ignore: must_be_immutable
+class EmailSent extends StatelessWidget {
 
-class WrongPasswordDialogBox extends StatelessWidget {
+  String email;
+  EmailSent(this.email);
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-        title: Text("Error"),
-        content: Text("Wrong Password"),
-        actions: <Widget>[
-          FlatButton(
-            onPressed: () {
-              Navigator.of(context).pop();
-            },
-            child: Text("okay"),
-          ),
-        ],
-      );
-  }
-}
-
-class WrongEmailDialogBox extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      title: Text("Error"),
-      content: Text("Wrong Email ID"),
+      title: Text("Successful"),
+      content: Text("Password Reset mail sent on $email",style: TextStyle(fontSize: 18.0),),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
@@ -36,16 +22,23 @@ class WrongEmailDialogBox extends StatelessWidget {
   }
 }
 
-class CounterDialogBox extends StatelessWidget {
+class AccountDelete extends StatelessWidget {
+
+  String deleteMail;
+
+  AccountDelete(String deleteMail) : deleteMail = deleteMail;
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Warning"),
-      content: Text("select atleast 1 item "),
+      title: Text("Deleted"),
+      content: Text("Account $deleteMail was Successfully Deleted",style: TextStyle(fontSize: 18.0),),
       actions: <Widget>[
-        FlatButton(
+        TextButton(
           onPressed: () {
-            Navigator.of(context).pop();
+            Navigator.of(context).pushReplacement(
+                MaterialPageRoute(
+                    builder: (context) =>
+                        Login()));
           },
           child: Text("okay"),
         ),
@@ -53,3 +46,4 @@ class CounterDialogBox extends StatelessWidget {
     );
   }
 }
+

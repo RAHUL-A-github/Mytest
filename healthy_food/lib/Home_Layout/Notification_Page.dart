@@ -7,25 +7,23 @@ class Notificationspage extends StatefulWidget {
 
 class _NotificationspageState extends State<Notificationspage> {
   List notifications =
-  List<String>.generate(25, (index) => 'notification $index');
+  List<String>.generate(0, (index) => 'notification $index');
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        elevation: 0.0,
-
+        // backgroundColor: Colors.transparent,
+        // elevation: 0.0,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
           },
-          color: Colors.black,
+          color: Colors.white,
           icon: Icon(Icons.arrow_back_ios_sharp),
         ),
         title: Text(
           'Notification List',
-          style: TextStyle(
-              fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.black),
+          style: TextStyle(fontSize: 20),
         ),
       ),
 
