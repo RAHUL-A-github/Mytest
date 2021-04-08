@@ -80,7 +80,6 @@ class _HomePageState extends State<HomePage>
                     } else {
                       final List<DocumentSnapshot> documents =
                           snapshot.data.docs;
-
                       return ListView(
                           children: documents
                               .map(
@@ -94,7 +93,7 @@ class _HomePageState extends State<HomePage>
                                     ),
                                   ),
                                   accountName: Text(
-                                    doc['name'],
+                                    '${doc['name']},${doc['lname']}',
                                     style: TextStyle(fontFamily: 'OpenSans'),
                                   ),
                                   accountEmail: Text(
@@ -123,6 +122,7 @@ class _HomePageState extends State<HomePage>
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => UserAccountPage()));
+
                         },
                       ),
                       ListTile(

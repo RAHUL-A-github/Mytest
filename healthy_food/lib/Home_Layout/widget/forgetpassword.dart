@@ -10,6 +10,7 @@ class ForgetPassword extends StatefulWidget {
 
 class _ForgetPasswordState extends State<ForgetPassword> {
   bool active = false;
+  bool errorflag = false;
   TextEditingController username = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   String useremail;
@@ -42,6 +43,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                         style: TextStyle(fontSize: 18.0),
                         obscureText: false,
                         decoration: InputDecoration(
+                         // errorText: errorflag ? 'User Not Found ' :null,
                           contentPadding:
                               EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                           //hintText: 'E-mail',
@@ -103,20 +105,25 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                               //   }
                               // }
 
-                              setState(() {
-                                active = true;
-                              });
+
 
                               useremail = username.text;
                               FirebaseAuth auth = FirebaseAuth.instance;
+                              auth.sendPasswordResetEmail(email: useremail)
+                                  .then((value) =>
+                                   setState(() {
+                                   active = true;}))
+                                  .catchError((error) => usernotfoundpopup(),
+                                //   setState(() {
+                                // errorflag = true;})
 
-                              auth.sendPasswordResetEmail(email: useremail);
+                              );
 
                               //FirebaseFirestore.instance.sendPasswordResetEmail(email: useremail);
                             }
                           },
                           child: Text(
-                            'Continue',
+                            'Send Link',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                                 color: Colors.white,
@@ -131,5 +138,17 @@ class _ForgetPasswordState extends State<ForgetPassword> {
               ),
             ),
           );
+  }
+  void usernotfoundpopup(){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white,
+          title: Text('Error',style: TextStyle(color: Colors.black),),
+          content: Text("User Not Found",style: TextStyle(fontSize: 18.0,color: Colors.black),),
+        );
+      },
+    );
   }
 }

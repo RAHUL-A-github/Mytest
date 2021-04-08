@@ -8,6 +8,7 @@ class EmailSent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
+      backgroundColor: Colors.white,
       title: Text("Successful"),
       content: Text("Password Reset mail sent on $email",style: TextStyle(fontSize: 18.0),),
       actions: <Widget>[
