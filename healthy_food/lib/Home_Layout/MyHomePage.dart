@@ -24,6 +24,7 @@ class _HomePageState extends State<HomePage>
   //used in shared_preferences
   String userEmail;
   DocumentReference userRef;
+  bool logoutflag = false;
 
   // used in firebase current user
   String useremail, username, userimage, uid;
@@ -54,6 +55,7 @@ class _HomePageState extends State<HomePage>
     print('Log out Successfully......');
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -62,6 +64,7 @@ class _HomePageState extends State<HomePage>
       key: scaffoldKey,
       drawer: new Drawer(
         child: Container(
+          color: Colors.black,
           child: Column(
             children: [
               SizedBox(
@@ -86,19 +89,19 @@ class _HomePageState extends State<HomePage>
                                 (doc) =>
                                 UserAccountsDrawerHeader(
                                   decoration: BoxDecoration(
-                                    color: Colors.blue,
+                                    color: Colors.yellowAccent.withOpacity(0.5),
                                     borderRadius: BorderRadius.only(
                                       topRight: Radius.circular(60.0),
                                       bottomRight: Radius.circular(60.0),
                                     ),
                                   ),
                                   accountName: Text(
-                                    '${doc['name']},${doc['lname']}',
-                                    style: TextStyle(fontFamily: 'OpenSans'),
+                                    '${doc['name']} ${doc['lname']}',
+                                    style: TextStyle(fontFamily: 'OpenSans',color: Colors.yellowAccent),
                                   ),
                                   accountEmail: Text(
                                     doc['email'],
-                                    style: TextStyle(fontFamily: 'OpenSans'),
+                                    style: TextStyle(fontFamily: 'OpenSans',color: Colors.yellowAccent),
                                   ),
                                   currentAccountPicture: CircleAvatar(
                                     backgroundImage: NetworkImage(doc['image']),
@@ -111,14 +114,15 @@ class _HomePageState extends State<HomePage>
                 ),
               ),
               Expanded(
+
                   child: ListView(
                     children: [
                       ListTile(
                         title: Text(
                           'Account',
-                          style: TextStyle(fontFamily: 'OpenSans'),
+                          style: TextStyle(fontFamily: 'OpenSans',color: Colors.yellowAccent),
                         ),
-                        leading: Icon(Icons.account_circle),
+                        leading: Icon(Icons.account_circle,color: Colors.yellowAccent),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => UserAccountPage()));
@@ -128,9 +132,9 @@ class _HomePageState extends State<HomePage>
                       ListTile(
                         title: Text(
                           'Notification',
-                          style: TextStyle(fontFamily: 'OpenSans'),
+                          style: TextStyle(fontFamily: 'OpenSans',color: Colors.yellowAccent),
                         ),
-                        leading: Icon(Icons.notifications),
+                        leading: Icon(Icons.notifications,color: Colors.yellowAccent),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => Notificationspage()));
@@ -139,9 +143,9 @@ class _HomePageState extends State<HomePage>
                       ListTile(
                         title: Text(
                           'Setting',
-                          style: TextStyle(fontFamily: 'OpenSans'),
+                          style: TextStyle(fontFamily: 'OpenSans',color: Colors.yellowAccent),
                         ),
-                        leading: Icon(Icons.settings),
+                        leading: Icon(Icons.settings,color: Colors.yellowAccent),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => SettingPage()));
@@ -175,7 +179,7 @@ class _HomePageState extends State<HomePage>
                 ),
                 TextButton.icon(
                     onPressed: () async {
-                      await _logOut();
+                      getLogout();
                     },
                     icon: Icon(
                       Icons.person,
@@ -187,7 +191,6 @@ class _HomePageState extends State<HomePage>
                       'Logout',
                       style: TextStyle(color: Colors.white),
                     )),
-
               ],
             ),
           ),
@@ -250,7 +253,7 @@ class _HomePageState extends State<HomePage>
                 .size
                 .height - 182.0,
             decoration: BoxDecoration(
-              color: Colors.white,
+              color: Colors.black.withOpacity(0.4),
               borderRadius: BorderRadius.only(topLeft: Radius.circular(75.0)),
             ),
             child: Container(
@@ -268,6 +271,34 @@ class _HomePageState extends State<HomePage>
           ),
         ],
       ),
+    );
+  }
+  void getLogout(){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white.withOpacity(0.9),
+          title: Text('Alert',style: TextStyle(color: Colors.black),),
+          content: Text("Are u sure to Log out",style: TextStyle(fontSize: 18.0,color: Colors.black),),
+          actions: [
+            TextButton(
+              onPressed: (){
+                Navigator.of(context).pop();
+              },
+              child: Text('Cancel'),
+            ),
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+                await _logOut();
+              },
+              child: Text('Logout'),
+
+            ),
+          ],
+        );
+      },
     );
   }
 }

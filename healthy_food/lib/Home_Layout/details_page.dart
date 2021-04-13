@@ -47,11 +47,12 @@ class _DetailsPageState extends State<DetailsPage> {
                 top: 80.0,
                 child: Container(
                   decoration: BoxDecoration(
+                    color: Colors.black.withOpacity(0.4),
                     borderRadius: BorderRadius.only(
                       topLeft: Radius.circular(40.0),
                       topRight: Radius.circular(40.0),
                     ),
-                    color: Colors.white,
+                    //color: Colors.white,
                   ),
                   height: MediaQuery.of(context).size.height - 100.0,
                   width: MediaQuery.of(context).size.width,
@@ -83,7 +84,7 @@ class _DetailsPageState extends State<DetailsPage> {
                   children: [
                     Text(
                       widget.foodName,
-                      style: TextStyle(
+                      style: TextStyle( color: Colors.yellowAccent,
                           fontSize: 20.0, fontWeight: FontWeight.bold),
                     ),
                     SizedBox(height: 20.0),
@@ -200,7 +201,7 @@ class _DetailsPageState extends State<DetailsPage> {
                         child: Center(
                           child: Text(
                             'Order',
-                            style: TextStyle(color: Colors.white),
+                            style: TextStyle(color: Colors.yellowAccent,fontWeight: FontWeight.bold,fontSize: 18.0),
                           ),
                         ),
                       ),

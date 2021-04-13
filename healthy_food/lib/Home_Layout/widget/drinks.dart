@@ -58,7 +58,7 @@ class Drinks extends StatelessWidget {
                       Text(
                         foodName,
                         style: TextStyle(
-                            fontSize: 2.5 * 7, fontWeight: FontWeight.bold,fontFamily: 'OpenSans'),
+                            fontSize: 2.5 * 7, fontWeight: FontWeight.bold,fontFamily: 'OpenSans',color: Colors.yellowAccent),
                       ),
                       Text(
                         foodPrice,
@@ -70,8 +70,7 @@ class Drinks extends StatelessWidget {
               ),
             ),
             IconButton(
-              icon: Icon(Icons.add),
-              color: Colors.black,
+              icon: Icon(Icons.add),color: Colors.yellowAccent,
               onPressed: () {
 
               },

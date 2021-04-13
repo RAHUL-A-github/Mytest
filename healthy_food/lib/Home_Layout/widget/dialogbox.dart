@@ -8,9 +8,9 @@ class EmailSent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      backgroundColor: Colors.white,
-      title: Text("Successful"),
-      content: Text("Password Reset mail sent on $email",style: TextStyle(fontSize: 18.0),),
+      backgroundColor: Colors.white.withOpacity(0.3),
+      title: Text("Successful",style: TextStyle(color: Colors.yellowAccent),),
+      content: Text("Password Reset mail sent on $email",style: TextStyle(fontSize: 18.0,color: Colors.yellowAccent),),
       actions: <Widget>[
         TextButton(
           onPressed: () {
@@ -47,4 +47,3 @@ class AccountDelete extends StatelessWidget {
     );
   }
 }
-

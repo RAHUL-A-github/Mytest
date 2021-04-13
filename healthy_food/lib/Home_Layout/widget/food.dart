@@ -17,12 +17,12 @@ class Food extends StatelessWidget {
                 _buildFoodItem(context,'assets/images/plate2.png',
                     'Plate 2', '\$22.00'),
                 _buildFoodItem(context,'assets/images/plate6.png',
-                    'Plate 6', '\$26.00'),
-                _buildFoodItem(context,'assets/images/plate5.png', 'Plate 5',
+                    'Plate 3', '\$26.00'),
+                _buildFoodItem(context,'assets/images/plate5.png', 'Plate 4',
                     '\$24.00'),
                 _buildFoodItem(context,'assets/images/plate3.png',
-                    'Avocado bowl', '\$26.00'),
-                _buildFoodItem(context,'assets/images/plate4.png', 'Plate 4',
+                    'plate 5', '\$26.00'),
+                _buildFoodItem(context,'assets/images/plate4.png', 'Plate 6',
                     '\$24.00'),
               ],
             ),
@@ -63,7 +63,7 @@ class Food extends StatelessWidget {
                       Text(
                         foodName,
                         style: TextStyle(
-                            fontSize: 2.5 * 7, fontWeight: FontWeight.bold,fontFamily: 'OpenSans'),
+                            fontSize: 2.5 * 7, fontWeight: FontWeight.bold,fontFamily: 'OpenSans',color: Colors.yellowAccent),
                       ),
                       Text(
                         foodPrice,
@@ -76,7 +76,7 @@ class Food extends StatelessWidget {
             ),
             IconButton(
               icon: Icon(Icons.add),
-              color: Colors.black,
+              color: Colors.yellowAccent,
               onPressed: () {
 
               },

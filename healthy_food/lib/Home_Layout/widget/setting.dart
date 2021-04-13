@@ -4,9 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:settings_ui/settings_ui.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:healthy_food/model/usermodel.dart';
-
 import 'dialogbox.dart';
-
 class SettingPage extends StatefulWidget {
   @override
   _SettingPageState createState() => _SettingPageState();
@@ -24,7 +22,9 @@ class _SettingPageState extends State<SettingPage> {
   Widget build(BuildContext context) {
     return active ? AccountDelete(deleteMail):Scaffold(
       appBar: AppBar(
-        title: Text('Setting'),
+        centerTitle: true,
+        title: Text('Setting',style: TextStyle(color: Colors.yellowAccent),),
+        backgroundColor: Colors.black,
       ),
       body: buildSettingsList(),
     );
@@ -32,39 +32,41 @@ class _SettingPageState extends State<SettingPage> {
 
   buildSettingsList() {
     return Container(
+      color: Colors.black,
       child: FutureBuilder(
           future: users.doc(_firebaseAuth).get(),
           // ignore: missing_return
           builder: (context, snapshot) {
             if(snapshot.connectionState == ConnectionState.waiting)
-              return Center(child: CircularProgressIndicator());
+              return Center(child: CircularProgressIndicator(backgroundColor: Colors.yellowAccent,),);
             if(snapshot.connectionState == ConnectionState.done){
               Map<String, dynamic> data = snapshot.data.data();
               UserData userData = UserData.fromJson(data);
             return Container(
               child: SettingsList(
+                backgroundColor: Colors.black,
                 contentPadding: EdgeInsets.only(top: 10.0),
                 sections: [
                   SettingsSection(
-                    title: 'Account',
+                    title: 'Account',titleTextStyle: TextStyle(color: Colors.yellow),
                     tiles: [
                       SettingsTile(
-                        title: userData.name,
-                        leading: Icon(Icons.person)
+                        title: '${userData.name} ${userData.lname}',titleTextStyle: TextStyle(color: Colors.yellowAccent),
+                        leading: Icon(Icons.person,color: Colors.yellowAccent,)
                         , onTap: () {
 
 
                       },),
                       SettingsTile(
-                        title: userData.mobileNumber,
-                        leading: Icon(Icons.phone),
+                        title: '+91 ${userData.mobileNumber}',titleTextStyle: TextStyle(color: Colors.yellow),
+                        leading: Icon(Icons.phone,color: Colors.yellowAccent,),
                         onTap: (){
 
                         },
                       ),
                       SettingsTile(
-                          title: userData.email,
-                          leading: Icon(Icons.email),
+                          title: userData.email,titleTextStyle: TextStyle(color: Colors.yellow),
+                          leading: Icon(Icons.email,color: Colors.yellowAccent,),
                           onTap: () {
 
 
@@ -72,12 +74,12 @@ class _SettingPageState extends State<SettingPage> {
                     ],
                   ),
                   SettingsSection(
-                    title: 'Security',
+                    title: 'Security',titleTextStyle: TextStyle(color: Colors.yellow),
                     tiles: [
                       SettingsTile.switchTile(
-                        title: 'Enable Notifications',
+                        title: 'Enable Notifications',titleTextStyle: TextStyle(color: Colors.yellow),
                         enabled: notificationsEnabled,
-                        leading: Icon(Icons.notifications_active),
+                        leading: Icon(Icons.notifications_active,color: Colors.yellowAccent,),
                         switchValue: svalue,
                         onToggle: (value) {
                           setState(() {
@@ -93,33 +95,30 @@ class _SettingPageState extends State<SettingPage> {
                           onTap: () {
                             deleteMail =
                                 FirebaseAuth.instance.currentUser.email;
-                            setState(() async {
-                              SharedPreferences pref = await SharedPreferences
-                                  .getInstance();
-                              pref.clear();
+                            setState((){
                               print('Account Deleted Successfully........');
                               active = true;
                             });
 
                             deleteuser();
                           },
-                          title: 'Delete Account',
-                          leading: Icon(Icons.delete_forever)),
+                          title: 'Delete Account',titleTextStyle: TextStyle(color: Colors.yellow),
+                          leading: Icon(Icons.delete_forever,color: Colors.yellowAccent,)),
                     ],
                   ),
                   SettingsSection(
-                    title: 'Misc',
+                    title: 'Misc',titleTextStyle: TextStyle(color: Colors.yellow),
                     tiles: [
                       SettingsTile(
-                          title: 'Terms of Service',
-                          leading: Icon(Icons.description),
+                          title: 'Terms of Service',titleTextStyle: TextStyle(color: Colors.yellow),
+                          leading: Icon(Icons.description,color: Colors.yellowAccent,),
                           onTap: () {
 
 
                           }),
                       SettingsTile(
-                          title: 'Open source licenses',
-                          leading: Icon(Icons.collections_bookmark),
+                          title: 'Open source licenses',titleTextStyle: TextStyle(color: Colors.yellow),
+                          leading: Icon(Icons.collections_bookmark,color: Colors.yellowAccent,),
                           onTap: () {
 
 
@@ -155,8 +154,11 @@ class _SettingPageState extends State<SettingPage> {
   }
   final CollectionReference userCollection =
   FirebaseFirestore.instance.collection('users');
-  void deleteuser() {
+  Future<void> deleteuser() async {
     userCollection.doc(FirebaseAuth.instance.currentUser.uid).delete();
     FirebaseAuth.instance.currentUser.delete();
+    SharedPreferences pref = await SharedPreferences
+        .getInstance();
+    pref.clear();
   }
 }

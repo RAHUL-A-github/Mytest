@@ -55,8 +55,9 @@ class _LoginFormState extends State<LoginForm> {
       child: active
           ? SignInLoading()
           : Scaffold(
+
               key: _scaffoldKey,
-              backgroundColor: Colors.transparent,
+              backgroundColor: Colors.black,
               body: SingleChildScrollView(
                 child: Container(
                   height: MediaQuery.of(context).size.height,
@@ -71,13 +72,13 @@ class _LoginFormState extends State<LoginForm> {
                         Text(
                           'The Grocery Bag',
                           style: TextStyle(
-                              fontSize: 40.0,
+                              fontSize: 45.0,
                               fontWeight: FontWeight.bold,
-                              color: Colors.blueAccent),
+                              color: Colors.blue.withOpacity(0.8)),
                         ),
                         Text(
                           'change the way',
-                          style: TextStyle(fontSize: 22.0, color: Colors.red),
+                          style: TextStyle(fontSize: 25.0, color: Colors.yellowAccent),
                         ),
                         Container(
                           child: SizedBox(
@@ -100,16 +101,20 @@ class _LoginFormState extends State<LoginForm> {
                                   ? 'Not a valid email.'
                                   : null,
                           onSaved: (value) => username.text = value,
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(fontSize: 18.0,color: Colors.yellowAccent),
                           obscureText: false,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.email),
+                            //fillColor: Colors.blue.withOpacity(0.8),
+                            //filled: true,
+                            prefixIcon: Icon(Icons.email,color: Colors.yellowAccent,),
                             contentPadding:
-                                EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            hintText: 'username',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
+                                EdgeInsets.all(15.0),
+                            labelText: 'Enter E-mail',labelStyle: TextStyle(color: Colors.yellowAccent,fontSize: 18.0),
+                           // hintText:'Enter email hare',hintStyle: TextStyle(color: Colors.yellowAccent),
+                            // border: OutlineInputBorder(
+                            //
+                            //   borderRadius: BorderRadius.circular(30.0),
+                            // ),
                           ),
                           controller: username,
                         ),
@@ -120,21 +125,24 @@ class _LoginFormState extends State<LoginForm> {
                           },
                           focusNode: passwordFocus,
                           textInputAction: TextInputAction.done,
-                          style: TextStyle(fontSize: 18.0),
+                          style: TextStyle(fontSize: 18.0,color: Colors.yellowAccent),
                           obscureText: isHidden,
                           controller: password,
                           decoration: InputDecoration(
-                            prefixIcon: Icon(Icons.security),
+                           // fillColor: Colors.blue.withOpacity(0.8),
+                            //filled: true,
+                            prefixIcon: Icon(Icons.security,color: Colors.yellowAccent,),
                             suffixIcon: InkWell(
-                              child: Icon(Icons.visibility),
+                              child: Icon(Icons.visibility,color: Colors.yellowAccent,),
                               onTap: password_view,
                             ),
                             contentPadding:
                                 EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                            hintText: 'password',
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(30.0),
-                            ),
+                            labelText:'Enter Password',labelStyle: TextStyle(color: Colors.yellowAccent),
+                            // border: OutlineInputBorder(
+                            //
+                            //   borderRadius: BorderRadius.circular(30.0),
+                            // ),
                           ),
                         ),
                         SizedBox(height: 5.0),
@@ -148,19 +156,20 @@ class _LoginFormState extends State<LoginForm> {
                                     MaterialPageRoute(builder: (context) => ForgetPassword()));
                               },
                               child: SizedBox(
-                                height: 30,child: Text('Forget Password'),
+                                height: 30,child: Text('Forget Password',style: TextStyle(color: Colors.yellowAccent,fontSize: 16.0),),
                               ),
                             ),
                           ],
                         ),
+                        SizedBox(height: 10.0,),
                         Material(
                           elevation: 5.0,
                           borderRadius: BorderRadius.circular(30.0),
-                          color: Colors.blueAccent,
+                          color: Colors.yellowAccent.withOpacity(0.5),
                           child: MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
+                            //minWidth: MediaQuery.of(context).size.width,
                             padding:
-                                EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                EdgeInsets.fromLTRB(90.0, 15.0, 90.0, 15.0),
                             onPressed: () async {
                               if (_formkey.currentState.validate()) {}
                               if (username.text == '' || password.text == '') {
@@ -185,7 +194,7 @@ class _LoginFormState extends State<LoginForm> {
                               'Log In',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.yellowAccent,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18.0),
                             ),
@@ -194,27 +203,28 @@ class _LoginFormState extends State<LoginForm> {
                         SizedBox(height: 10,),
                         Text(
                           'or',
-                          style: TextStyle(fontSize: 18.0,fontWeight: FontWeight.bold),
+                          style: TextStyle(fontSize: 20.0,fontWeight: FontWeight.bold,color: Colors.yellowAccent),
                         ),
                         SizedBox(height: 10),
                         Material(
                           elevation: 5.0,
                           borderRadius: BorderRadius.circular(30.0),
-                          color: Colors.blueAccent,
+                          color: Colors.yellowAccent.withOpacity(0.5),
                           child: MaterialButton(
-                            minWidth: MediaQuery.of(context).size.width,
+                            //minWidth: MediaQuery.of(context).size.width,
                             padding:
-                                EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                EdgeInsets.fromLTRB(60.0, 15.0, 60.0, 15.0),
                             onPressed: () {
                               Navigator.of(context).pushReplacement(
                                   MaterialPageRoute(
-                                      builder: (context) => SignIn()));
+                                    //fullscreenDialog: true,
+                                      builder: (context)  {return SignIn();}));
                             },
                             child: Text(
                               'Sign up',
                               textAlign: TextAlign.center,
                               style: TextStyle(
-                                  color: Colors.white,
+                                  color: Colors.yellowAccent,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 18.0),
                             ),
@@ -248,13 +258,25 @@ class _LoginFormState extends State<LoginForm> {
       ))
           .user;
       if (user != null) {
-        Navigator.of(context).pushReplacement(
-            MaterialPageRoute(builder: (context) => HomePage()));
-        String email = username.text;
-        print(user.uid);
-        print(user.email);
-        print('Log In Successfully......');
-        _setUserEmail(email);
+        if(user.emailVerified){
+          Navigator.of(context).pushReplacement(
+              MaterialPageRoute(builder: (context) => HomePage()));
+          String email = username.text;
+          print(user.uid);
+          print(user.email);
+          print('Log In Successfully......');
+          _setUserEmail(email);
+        }
+        else{
+          SharedPreferences pref = await SharedPreferences.getInstance();
+          pref.clear();
+          EmailVerification();
+          print("account not verified");
+          setState(() {
+            active = false;
+          });
+        }
+
       }
     } catch (e) {
       setState(() => active = false);
@@ -285,5 +307,26 @@ class _LoginFormState extends State<LoginForm> {
           break;
       }
     }
+  }
+  void EmailVerification(){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white.withOpacity(0.9),
+          title: Text('Error',style: TextStyle(color: Colors.black),),
+          content: Text("Account Not exist ! ",style: TextStyle(fontSize: 18.0,color: Colors.black),),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pop();
+              },
+              child: Text('Close'),
+
+            ),
+          ],
+        );
+      },
+    );
   }
 }

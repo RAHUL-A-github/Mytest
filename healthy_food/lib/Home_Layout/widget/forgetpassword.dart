@@ -19,8 +19,11 @@ class _ForgetPasswordState extends State<ForgetPassword> {
     return active
         ? EmailSent(useremail)
         : Scaffold(
+      backgroundColor: Colors.white.withOpacity(0.6),
             appBar: AppBar(
-              title: Text('Forget Password'),
+              backgroundColor: Colors.yellowAccent.withOpacity(0.5),
+              title: Text('Forget Password',style: TextStyle(color: Colors.yellowAccent),),
+
             ),
             body: Container(
               height: MediaQuery.of(context).size.height,
@@ -31,108 +34,132 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Container(
-                      height: 100,
-                      width: 300,
-                      child: TextFormField(
-                        textInputAction: TextInputAction.next,
-                        validator: (value) =>
-                            !EmailValidator.validate(value, true)
-                                ? 'Not a valid email.'
-                                : null,
-                        onSaved: (value) => username.text = value,
-                        style: TextStyle(fontSize: 18.0),
-                        obscureText: false,
-                        decoration: InputDecoration(
-                         // errorText: errorflag ? 'User Not Found ' :null,
-                          contentPadding:
-                              EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          //hintText: 'E-mail',
-                          labelText: 'E-mail',
-                          border: OutlineInputBorder(
-                            borderRadius: BorderRadius.circular(30.0),
-                          ),
-                        ),
-                        controller: username,
+                     // color: Colors.blue,
+                      decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15.0)),
+                      border: Border.all(color: Colors.yellowAccent,width: 4),
+                        color: Colors.black
                       ),
-                    ),
-                    Container(
-                      height: 50,
-                      width: 120,
-                      child: Material(
-                        elevation: 5.0,
-                        borderRadius: BorderRadius.circular(30.0),
-                        color: Colors.blueAccent,
-                        child: MaterialButton(
-                          minWidth: MediaQuery.of(context).size.width,
-                          padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
-                          onPressed: () {
-                            if (_formKey.currentState.validate()) {}
-                            if (username.text == '') {
-                              final snackBar = SnackBar(
-                                content: Text('Please Enter the E-mail..!'),
-                                action: SnackBarAction(
-                                  label: 'warning',
-                                  onPressed: () {},
+
+                      //decoration:BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15.0))),
+                      alignment: Alignment.center,
+                      //color: Colors.yellowAccent.withOpacity(0.4),
+                      height: 300,
+                      width: 350,
+                      child: Padding(
+                        padding: const EdgeInsets.all(15.0),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            TextFormField(
+                              textInputAction: TextInputAction.next,
+                              validator: (value) =>
+                                  !EmailValidator.validate(value, true)
+                                      ? 'Not a valid email.'
+                                      : null,
+                              onSaved: (value) => username.text = value,
+                              style: TextStyle(fontSize: 18.0,color: Colors.yellowAccent),
+                              obscureText: false,
+                              decoration: InputDecoration(
+                                fillColor: Colors.yellowAccent.withOpacity(0.4),
+                                filled: true,
+                                prefixIcon: Icon(Icons.email_outlined,color: Colors.yellowAccent,),
+
+                               // errorText: errorflag ? 'User Not Found ' :null,
+                                contentPadding:
+                                    EdgeInsets.all(15.0),
+                                //hintText: 'E-mail',
+                                labelText: 'Enter E-mail',labelStyle: TextStyle(color: Colors.yellowAccent,fontSize: 20.0),
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(30.0),
                                 ),
-                              );
-                              ScaffoldMessenger.of(context)
-                                  .showSnackBar(snackBar);
-                            } else {
-                              // try {
-                              //   useremail = username.text;
-                              //   FirebaseAuth auth = FirebaseAuth.instance;
-                              //   auth.sendPasswordResetEmail(email: useremail);
-                              //   // setState(() {
-                              //   //   active = true;
-                              //   // });
-                              // } catch (e) {
-                              //   print(e);
-                              //   //setState(() => active = false);
-                              //   switch (e.code) {
-                              //     case "user-not-found":
-                              //       {
-                              //         final snackBar = SnackBar(
-                              //           content: Text('user not found..!'),
-                              //           action: SnackBarAction(
-                              //             label: 'warning',
-                              //             onPressed: () {},
-                              //           ),
-                              //         );
-                              //         ScaffoldMessenger.of(context)
-                              //             .showSnackBar(snackBar);
-                              //       }
-                              //       break;
-                              //   }
-                              // }
+                              ),
+                              controller: username,
+                            ),
+                            SizedBox(height: 50.0,),
+                            Container(
+                              height: 50,
+                              width: 120,
+                              child: Material(
+                                elevation: 5.0,
+                                borderRadius: BorderRadius.circular(30.0),
+                                color: Colors.yellowAccent.withOpacity(0.4),
+                                child: MaterialButton(
+                                  minWidth: MediaQuery.of(context).size.width,
+                                  padding: EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
+                                  onPressed: () {
+                                    if (_formKey.currentState.validate()) {}
+                                    if (username.text == '') {
+                                      final snackBar = SnackBar(
+                                        backgroundColor: Colors.yellowAccent.withOpacity(0.4),
+                                        content: Text('Please Enter the E-mail..!',style: TextStyle(color: Colors.yellowAccent),),
+                                        action: SnackBarAction(
+                                          label: '',
+                                          onPressed: () {},
+                                        ),
+                                      );
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(snackBar);
+                                    } else {
+                                      // try {
+                                      //   useremail = username.text;
+                                      //   FirebaseAuth auth = FirebaseAuth.instance;
+                                      //   auth.sendPasswordResetEmail(email: useremail);
+                                      //   // setState(() {
+                                      //   //   active = true;
+                                      //   // });
+                                      // } catch (e) {
+                                      //   print(e);
+                                      //   //setState(() => active = false);
+                                      //   switch (e.code) {
+                                      //     case "user-not-found":
+                                      //       {
+                                      //         final snackBar = SnackBar(
+                                      //           content: Text('user not found..!'),
+                                      //           action: SnackBarAction(
+                                      //             label: 'warning',
+                                      //             onPressed: () {},
+                                      //           ),
+                                      //         );
+                                      //         ScaffoldMessenger.of(context)
+                                      //             .showSnackBar(snackBar);
+                                      //       }
+                                      //       break;
+                                      //   }
+                                      // }
 
 
 
-                              useremail = username.text;
-                              FirebaseAuth auth = FirebaseAuth.instance;
-                              auth.sendPasswordResetEmail(email: useremail)
-                                  .then((value) =>
-                                   setState(() {
-                                   active = true;}))
-                                  .catchError((error) => usernotfoundpopup(),
-                                //   setState(() {
-                                // errorflag = true;})
+                                      useremail = username.text;
+                                      FirebaseAuth auth = FirebaseAuth.instance;
+                                      auth.sendPasswordResetEmail(email: useremail)
+                                          .then((value) =>
+                                          setState(() {
+                                            active = true;}))
+                                          .catchError((error) => usernotfoundpopup(),
+                                        //   setState(() {
+                                        // errorflag = true;})
 
-                              );
+                                      );
 
-                              //FirebaseFirestore.instance.sendPasswordResetEmail(email: useremail);
-                            }
-                          },
-                          child: Text(
-                            'Send Link',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 18.0),
-                          ),
+                                      //FirebaseFirestore.instance.sendPasswordResetEmail(email: useremail);
+                                    }
+                                  },
+                                  child: Text(
+                                    'Send Link',
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                        color: Colors.yellowAccent,
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 18.0),
+                                  ),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
+
                   ],
                 ),
               ),
@@ -144,7 +171,7 @@ class _ForgetPasswordState extends State<ForgetPassword> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.yellowAccent,
           title: Text('Error',style: TextStyle(color: Colors.black),),
           content: Text("User Not Found",style: TextStyle(fontSize: 18.0,color: Colors.black),),
         );

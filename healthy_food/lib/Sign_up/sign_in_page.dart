@@ -6,21 +6,15 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:email_validator/email_validator.dart';
 import 'package:flutter/services.dart';
-import 'package:healthy_food/Home_Layout/MyHomePage.dart';
 import 'package:healthy_food/Home_Layout/widget/loading.dart';
 import 'package:healthy_food/Login/Login.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 final FirebaseAuth _auth = FirebaseAuth.instance;
 
 class SignInPage extends StatefulWidget {
   @override
   _SignInPageState createState() => _SignInPageState();
-}
-void _setUserEmail(String useremail) async {
-  SharedPreferences pref = await SharedPreferences.getInstance();
-  pref.setString('userEmail', useremail);
 }
 class _SignInPageState extends State<SignInPage> {
 
@@ -57,7 +51,7 @@ class _SignInPageState extends State<SignInPage> {
       key: _sign_formkey,
       child: active ? SignUpLoading() : Scaffold(
         key: _scaffoldKey,
-        backgroundColor: Colors.transparent,
+        backgroundColor: Colors.black.withOpacity(0.08),
         body: SingleChildScrollView(
           child: Container(
             height: MediaQuery.of(context).size.height,
@@ -351,16 +345,28 @@ class _SignInPageState extends State<SignInPage> {
                               ))
                                   .user;
                               if (user != null) {
-                                Navigator.of(context).pushReplacement(
-                                    MaterialPageRoute(
-                                        builder: (context) =>
-                                            HomePage()));
+                                if(user.emailVerified) {
+                                  print('user is verified');
+                                }
+                                else{
+                                  try {
+                                    user.sendEmailVerification();
+                                    print('verification mail sent successfully ');
+                                  } catch (e)
+                                  {
+                                    print("An error occured while trying to send email verification");
+                                    print(e.message);
+                                  }
+
+                                  EmailVerification();
+
+                                }
                                 String email = _email;
                                 print(user.uid);
                                 print(user.email);
                                 print('Sign Up Successfully......');
-                                _setUserEmail(email);
                               }
+
                             }
                           else{
                             final snackBar = SnackBar(
@@ -521,4 +527,29 @@ class _SignInPageState extends State<SignInPage> {
         await addData();
       }
   }
+  void EmailVerification(){
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          backgroundColor: Colors.white.withOpacity(0.9),
+          title: Text('Verification',style: TextStyle(color: Colors.black),),
+          content: Text("verification link send on your email please verify first Then Back to log in",style: TextStyle(fontSize: 18.0,color: Colors.black),),
+          actions: [
+            TextButton(
+              onPressed: () async {
+                Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                        builder: (context) =>
+                            Login()));
+              },
+              child: Text('close'),
+
+            ),
+          ],
+        );
+      },
+    );
+  }
+
 }

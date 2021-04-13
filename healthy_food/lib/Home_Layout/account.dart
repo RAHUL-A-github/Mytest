@@ -8,7 +8,9 @@ class UserAccountPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Profile'),
+        backgroundColor: Colors.black,
+        centerTitle: true,
+        title: Text('Profile Page',style: TextStyle(color: Colors.yellowAccent),),
 
       ),
       body:UserPrefrences(),
@@ -29,6 +31,7 @@ class _UserPrefrencesState extends State<UserPrefrences> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       // body: new StreamBuilder(
       //     stream: FirebaseFirestore.instance
       //         .collection('users')
@@ -129,11 +132,11 @@ class _UserPrefrencesState extends State<UserPrefrences> {
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
                             SizedBox(height: 10.0,),
-                            Text("Name: ${userData.name} ${userData.lname}",style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold),),
+                            Text("Name: ${userData.name} ${userData.lname}",style: TextStyle(fontSize: 16.0,fontWeight: FontWeight.bold,color: Colors.yellowAccent),),
                             SizedBox(height: 10.0,),
-                            Text("E-mail: ${userData.email}",style: TextStyle(fontSize: 14.0,fontWeight: FontWeight.bold)),
+                            Text("E-mail: ${userData.email}",style: TextStyle(fontSize: 14.0,fontWeight: FontWeight.bold,color: Colors.yellowAccent)),
                             SizedBox(height: 10.0,),
-                            Text("mob:${userData.mobileNumber}",style: TextStyle(fontSize: 14.0,fontWeight: FontWeight.bold)),
+                            Text("mob:${userData.mobileNumber}",style: TextStyle(fontSize: 14.0,fontWeight: FontWeight.bold,color: Colors.yellowAccent)),
                           ],
                         ),
                       ),
