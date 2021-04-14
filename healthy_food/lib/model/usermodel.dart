@@ -4,8 +4,9 @@ class UserData {
   String lname;
   String name;
   String image;
+  String date;
 
-  UserData({this.email, this.mobileNumber, this.lname, this.name, this.image});
+  UserData({this.email, this.mobileNumber, this.lname, this.name, this.image,this.date});
 
   UserData.fromJson(Map<String, dynamic> json) {
     email = json['email'];
@@ -13,6 +14,7 @@ class UserData {
     lname = json['lname'];
     name = json['name'];
     image = json['image'];
+    date = json['Date'];
   }
 
   Map<String, dynamic> toJson() {
@@ -22,6 +24,7 @@ class UserData {
     data['lname'] = this.lname;
     data['name'] = this.name;
     data['image'] = this.image;
+    data['Date'] = this.date;
     return data;
   }
 }

@@ -36,9 +36,10 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                     Container(
                      // color: Colors.blue,
                       decoration: BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15.0)),
-                      border: Border.all(color: Colors.yellowAccent,width: 4),
-                        color: Colors.black
+                      border: Border.all(color: Colors.black,width: 4),
+                        color: Colors.black.withOpacity(0.1)
                       ),
+
 
                       //decoration:BoxDecoration(borderRadius: BorderRadius.all(Radius.circular(15.0))),
                       alignment: Alignment.center,
@@ -60,15 +61,13 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                               style: TextStyle(fontSize: 18.0,color: Colors.yellowAccent),
                               obscureText: false,
                               decoration: InputDecoration(
-                                fillColor: Colors.yellowAccent.withOpacity(0.4),
+                                fillColor: Colors.white.withOpacity(0.5),
                                 filled: true,
-                                prefixIcon: Icon(Icons.email_outlined,color: Colors.yellowAccent,),
-
-                               // errorText: errorflag ? 'User Not Found ' :null,
+                                prefixIcon: Icon(Icons.email_outlined,color: Colors.black,),
                                 contentPadding:
                                     EdgeInsets.all(15.0),
                                 //hintText: 'E-mail',
-                                labelText: 'Enter E-mail',labelStyle: TextStyle(color: Colors.yellowAccent,fontSize: 20.0),
+                                labelText: 'Enter E-mail',labelStyle: TextStyle(color: Colors.black,fontSize: 20.0),
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.circular(30.0),
                                 ),
@@ -100,35 +99,6 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                       ScaffoldMessenger.of(context)
                                           .showSnackBar(snackBar);
                                     } else {
-                                      // try {
-                                      //   useremail = username.text;
-                                      //   FirebaseAuth auth = FirebaseAuth.instance;
-                                      //   auth.sendPasswordResetEmail(email: useremail);
-                                      //   // setState(() {
-                                      //   //   active = true;
-                                      //   // });
-                                      // } catch (e) {
-                                      //   print(e);
-                                      //   //setState(() => active = false);
-                                      //   switch (e.code) {
-                                      //     case "user-not-found":
-                                      //       {
-                                      //         final snackBar = SnackBar(
-                                      //           content: Text('user not found..!'),
-                                      //           action: SnackBarAction(
-                                      //             label: 'warning',
-                                      //             onPressed: () {},
-                                      //           ),
-                                      //         );
-                                      //         ScaffoldMessenger.of(context)
-                                      //             .showSnackBar(snackBar);
-                                      //       }
-                                      //       break;
-                                      //   }
-                                      // }
-
-
-
                                       useremail = username.text;
                                       FirebaseAuth auth = FirebaseAuth.instance;
                                       auth.sendPasswordResetEmail(email: useremail)
@@ -136,12 +106,8 @@ class _ForgetPasswordState extends State<ForgetPassword> {
                                           setState(() {
                                             active = true;}))
                                           .catchError((error) => usernotfoundpopup(),
-                                        //   setState(() {
-                                        // errorflag = true;})
 
                                       );
-
-                                      //FirebaseFirestore.instance.sendPasswordResetEmail(email: useremail);
                                     }
                                   },
                                   child: Text(

@@ -24,7 +24,7 @@ class _SettingPageState extends State<SettingPage> {
       appBar: AppBar(
         centerTitle: true,
         title: Text('Setting',style: TextStyle(color: Colors.yellowAccent),),
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black.withOpacity(0.2),
       ),
       body: buildSettingsList(),
     );
@@ -32,41 +32,41 @@ class _SettingPageState extends State<SettingPage> {
 
   buildSettingsList() {
     return Container(
-      color: Colors.black,
+      color: Colors.white.withOpacity(0.1),
       child: FutureBuilder(
           future: users.doc(_firebaseAuth).get(),
           // ignore: missing_return
           builder: (context, snapshot) {
             if(snapshot.connectionState == ConnectionState.waiting)
-              return Center(child: CircularProgressIndicator(backgroundColor: Colors.yellowAccent,),);
+              return Center(child: CircularProgressIndicator(backgroundColor: Colors.black,),);
             if(snapshot.connectionState == ConnectionState.done){
               Map<String, dynamic> data = snapshot.data.data();
               UserData userData = UserData.fromJson(data);
             return Container(
               child: SettingsList(
-                backgroundColor: Colors.black,
+                backgroundColor: Colors.black.withOpacity(0.1),
                 contentPadding: EdgeInsets.only(top: 10.0),
                 sections: [
                   SettingsSection(
-                    title: 'Account',titleTextStyle: TextStyle(color: Colors.yellow),
+                    title: 'Account',titleTextStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
                     tiles: [
                       SettingsTile(
-                        title: '${userData.name} ${userData.lname}',titleTextStyle: TextStyle(color: Colors.yellowAccent),
-                        leading: Icon(Icons.person,color: Colors.yellowAccent,)
+                        title: '${userData.name} ${userData.lname}',titleTextStyle: TextStyle(color: Colors.black),
+                        leading: Icon(Icons.person,color: Colors.black,)
                         , onTap: () {
 
 
                       },),
                       SettingsTile(
-                        title: '+91 ${userData.mobileNumber}',titleTextStyle: TextStyle(color: Colors.yellow),
-                        leading: Icon(Icons.phone,color: Colors.yellowAccent,),
+                        title: '+91 ${userData.mobileNumber}',titleTextStyle: TextStyle(color: Colors.black),
+                        leading: Icon(Icons.phone,color: Colors.black,),
                         onTap: (){
 
                         },
                       ),
                       SettingsTile(
-                          title: userData.email,titleTextStyle: TextStyle(color: Colors.yellow),
-                          leading: Icon(Icons.email,color: Colors.yellowAccent,),
+                          title: userData.email,titleTextStyle: TextStyle(color: Colors.black),
+                          leading: Icon(Icons.email,color: Colors.black,),
                           onTap: () {
 
 
@@ -74,12 +74,12 @@ class _SettingPageState extends State<SettingPage> {
                     ],
                   ),
                   SettingsSection(
-                    title: 'Security',titleTextStyle: TextStyle(color: Colors.yellow),
+                    title: 'Security',titleTextStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
                     tiles: [
                       SettingsTile.switchTile(
-                        title: 'Enable Notifications',titleTextStyle: TextStyle(color: Colors.yellow),
+                        title: 'Enable Notifications',titleTextStyle: TextStyle(color: Colors.black),
                         enabled: notificationsEnabled,
-                        leading: Icon(Icons.notifications_active,color: Colors.yellowAccent,),
+                        leading: Icon(Icons.notifications_active,color: Colors.black,),
                         switchValue: svalue,
                         onToggle: (value) {
                           setState(() {
@@ -102,23 +102,23 @@ class _SettingPageState extends State<SettingPage> {
 
                             deleteuser();
                           },
-                          title: 'Delete Account',titleTextStyle: TextStyle(color: Colors.yellow),
-                          leading: Icon(Icons.delete_forever,color: Colors.yellowAccent,)),
+                          title: 'Delete Account',titleTextStyle: TextStyle(color: Colors.black),
+                          leading: Icon(Icons.delete_forever,color: Colors.black,)),
                     ],
                   ),
                   SettingsSection(
-                    title: 'Misc',titleTextStyle: TextStyle(color: Colors.yellow),
+                    title: 'Misc',titleTextStyle: TextStyle(color: Colors.black,fontWeight: FontWeight.bold),
                     tiles: [
                       SettingsTile(
-                          title: 'Terms of Service',titleTextStyle: TextStyle(color: Colors.yellow),
-                          leading: Icon(Icons.description,color: Colors.yellowAccent,),
+                          title: 'Terms of Service',titleTextStyle: TextStyle(color: Colors.black),
+                          leading: Icon(Icons.description,color: Colors.black,),
                           onTap: () {
 
 
                           }),
                       SettingsTile(
-                          title: 'Open source licenses',titleTextStyle: TextStyle(color: Colors.yellow),
-                          leading: Icon(Icons.collections_bookmark,color: Colors.yellowAccent,),
+                          title: 'Open source licenses',titleTextStyle: TextStyle(color: Colors.black),
+                          leading: Icon(Icons.collections_bookmark,color: Colors.black,),
                           onTap: () {
 
 

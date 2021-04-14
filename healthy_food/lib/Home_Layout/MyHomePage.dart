@@ -64,7 +64,7 @@ class _HomePageState extends State<HomePage>
       key: scaffoldKey,
       drawer: new Drawer(
         child: Container(
-          color: Colors.black,
+          color: Colors.black.withOpacity(0.5),
           child: Column(
             children: [
               SizedBox(
@@ -97,11 +97,11 @@ class _HomePageState extends State<HomePage>
                                   ),
                                   accountName: Text(
                                     '${doc['name']} ${doc['lname']}',
-                                    style: TextStyle(fontFamily: 'OpenSans',color: Colors.yellowAccent),
+                                    style: TextStyle(fontFamily: 'OpenSans',color: Colors.black,fontWeight: FontWeight.bold),
                                   ),
                                   accountEmail: Text(
                                     doc['email'],
-                                    style: TextStyle(fontFamily: 'OpenSans',color: Colors.yellowAccent),
+                                    style: TextStyle(fontFamily: 'OpenSans',color: Colors.black,fontWeight: FontWeight.bold),
                                   ),
                                   currentAccountPicture: CircleAvatar(
                                     backgroundImage: NetworkImage(doc['image']),
@@ -120,9 +120,9 @@ class _HomePageState extends State<HomePage>
                       ListTile(
                         title: Text(
                           'Account',
-                          style: TextStyle(fontFamily: 'OpenSans',color: Colors.yellowAccent),
+                          style: TextStyle(fontFamily: 'OpenSans',color: Colors.black),
                         ),
-                        leading: Icon(Icons.account_circle,color: Colors.yellowAccent),
+                        leading: Icon(Icons.account_circle,color: Colors.black),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => UserAccountPage()));
@@ -132,9 +132,9 @@ class _HomePageState extends State<HomePage>
                       ListTile(
                         title: Text(
                           'Notification',
-                          style: TextStyle(fontFamily: 'OpenSans',color: Colors.yellowAccent),
+                          style: TextStyle(fontFamily: 'OpenSans',color: Colors.black),
                         ),
-                        leading: Icon(Icons.notifications,color: Colors.yellowAccent),
+                        leading: Icon(Icons.notifications,color: Colors.black),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => Notificationspage()));
@@ -143,9 +143,9 @@ class _HomePageState extends State<HomePage>
                       ListTile(
                         title: Text(
                           'Setting',
-                          style: TextStyle(fontFamily: 'OpenSans',color: Colors.yellowAccent),
+                          style: TextStyle(fontFamily: 'OpenSans',color: Colors.black),
                         ),
-                        leading: Icon(Icons.settings,color: Colors.yellowAccent),
+                        leading: Icon(Icons.settings,color: Colors.black),
                         onTap: () {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (context) => SettingPage()));
@@ -237,11 +237,6 @@ class _HomePageState extends State<HomePage>
                         ),
                       ),
                     ]),
-                // SizedBox(width: 10.0),
-                // Text(
-                //   'Food',
-                //   style: TextStyle(color: Colors.white, fontSize: 25.0),
-                // ),
               ],
             ),
           ),

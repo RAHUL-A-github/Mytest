@@ -19,6 +19,7 @@ void _setUserEmail(String useremail) async {
 // ignore: camel_case_types
 class _LoginFormState extends State<LoginForm> {
   bool active = false;
+
   //FlutterOtp otp = FlutterOtp();
   TextEditingController username = TextEditingController();
   TextEditingController password = TextEditingController();
@@ -110,11 +111,6 @@ class _LoginFormState extends State<LoginForm> {
                             contentPadding:
                                 EdgeInsets.all(15.0),
                             labelText: 'Enter E-mail',labelStyle: TextStyle(color: Colors.yellowAccent,fontSize: 18.0),
-                           // hintText:'Enter email hare',hintStyle: TextStyle(color: Colors.yellowAccent),
-                            // border: OutlineInputBorder(
-                            //
-                            //   borderRadius: BorderRadius.circular(30.0),
-                            // ),
                           ),
                           controller: username,
                         ),
@@ -129,8 +125,6 @@ class _LoginFormState extends State<LoginForm> {
                           obscureText: isHidden,
                           controller: password,
                           decoration: InputDecoration(
-                           // fillColor: Colors.blue.withOpacity(0.8),
-                            //filled: true,
                             prefixIcon: Icon(Icons.security,color: Colors.yellowAccent,),
                             suffixIcon: InkWell(
                               child: Icon(Icons.visibility,color: Colors.yellowAccent,),
@@ -139,10 +133,6 @@ class _LoginFormState extends State<LoginForm> {
                             contentPadding:
                                 EdgeInsets.fromLTRB(20.0, 15.0, 20.0, 15.0),
                             labelText:'Enter Password',labelStyle: TextStyle(color: Colors.yellowAccent),
-                            // border: OutlineInputBorder(
-                            //
-                            //   borderRadius: BorderRadius.circular(30.0),
-                            // ),
                           ),
                         ),
                         SizedBox(height: 5.0),
@@ -167,7 +157,6 @@ class _LoginFormState extends State<LoginForm> {
                           borderRadius: BorderRadius.circular(30.0),
                           color: Colors.yellowAccent.withOpacity(0.5),
                           child: MaterialButton(
-                            //minWidth: MediaQuery.of(context).size.width,
                             padding:
                                 EdgeInsets.fromLTRB(90.0, 15.0, 90.0, 15.0),
                             onPressed: () async {
@@ -262,7 +251,6 @@ class _LoginFormState extends State<LoginForm> {
           Navigator.of(context).pushReplacement(
               MaterialPageRoute(builder: (context) => HomePage()));
           String email = username.text;
-          print(user.uid);
           print(user.email);
           print('Log In Successfully......');
           _setUserEmail(email);
@@ -315,7 +303,7 @@ class _LoginFormState extends State<LoginForm> {
         return AlertDialog(
           backgroundColor: Colors.white.withOpacity(0.9),
           title: Text('Error',style: TextStyle(color: Colors.black),),
-          content: Text("Account Not exist ! ",style: TextStyle(fontSize: 18.0,color: Colors.black),),
+          content: Text("Account Not exist ! \n Or \n Not Verify: Please verify first",style: TextStyle(fontSize: 18.0,color: Colors.black),),
           actions: [
             TextButton(
               onPressed: () async {

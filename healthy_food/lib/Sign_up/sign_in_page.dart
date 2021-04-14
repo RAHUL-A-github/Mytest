@@ -18,7 +18,7 @@ class SignInPage extends StatefulWidget {
 }
 class _SignInPageState extends State<SignInPage> {
 
-  String _name, _lname, _email, _userImage, _uId, _mobile;
+  String _name, _lname, _email, _userImage, _uId, _mobile,_timeStamp;
   File _image;
   final picker = ImagePicker();
   bool isHidden = true;
@@ -41,7 +41,17 @@ class _SignInPageState extends State<SignInPage> {
 
   // ignore: non_constant_identifier_names
   TextEditingController confirm_password = TextEditingController();
+@override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    name.dispose();
+    lname.dispose();
+    email.dispose();
+    password.dispose();
+    numController.dispose();
 
+  }
   // ignore: non_constant_identifier_names
   final _sign_formkey = GlobalKey<FormState>();
   final GlobalKey<ScaffoldState> _scaffoldKey = new GlobalKey<ScaffoldState>();
@@ -140,11 +150,6 @@ class _SignInPageState extends State<SignInPage> {
                       controller: name,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                          // suffixIcon: InkWell(
-                          //     child: Icon(Icons.clear_all),
-                          //     onTap: () {
-                          //       name.text = '';
-                          //     }),
                           contentPadding:
                               EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
                           labelText: 'Name',
@@ -170,11 +175,6 @@ class _SignInPageState extends State<SignInPage> {
                       controller: lname,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                          // suffixIcon: InkWell(
-                          //     child: Icon(Icons.clear_all),
-                          //     onTap: () {
-                          //       lname.text = '';
-                          //     }),
                           contentPadding:
                               EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
                           labelText: 'Last Name',
@@ -199,11 +199,6 @@ class _SignInPageState extends State<SignInPage> {
                       controller: email,
                       style: TextStyle(fontSize: 18.0),
                       decoration: InputDecoration(
-                          // suffixIcon: InkWell(
-                          //     child: Icon(Icons.clear_all),
-                          //     onTap: () {
-                          //       email.text = '';
-                          //     }),
                           contentPadding:
                               EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
                           labelText: 'E-mail',
@@ -266,11 +261,6 @@ class _SignInPageState extends State<SignInPage> {
                       style: TextStyle(fontSize: 18.0),
                       controller: confirm_password,
                       decoration: InputDecoration(
-                        // suffixIcon: InkWell(
-                        //     child: Icon(Icons.clear_all),
-                        //     onTap: () {
-                        //       email.text = '';
-                        //     }),
                         contentPadding:
                             EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
                         labelText: 'Re-password',
@@ -299,11 +289,6 @@ class _SignInPageState extends State<SignInPage> {
                       style: TextStyle(fontSize: 18.0),
                       controller: numController,
                       decoration: InputDecoration(
-                        // suffixIcon: InkWell(
-                        //     child: Icon(Icons.clear_all),
-                        //     onTap: () {
-                        //       numController.text = '';
-                        //     }),
                         contentPadding:
                             EdgeInsets.fromLTRB(25.0, 0.0, 0.0, 0.0),
                         labelText: 'Mobile No.',
@@ -359,7 +344,6 @@ class _SignInPageState extends State<SignInPage> {
                                   }
 
                                   EmailVerification();
-
                                 }
                                 String email = _email;
                                 print(user.uid);
@@ -422,6 +406,10 @@ class _SignInPageState extends State<SignInPage> {
     _uId = _auth.currentUser.uid;
     _mobile = numController.text;
     _userImage = profileImageUrl.toString();
+    DateTime currentPhoneDate = DateTime.now();
+    Timestamp myTimeStamp = Timestamp.fromDate(currentPhoneDate);
+    DateTime _timeStamp = myTimeStamp.toDate();
+
     print(_userImage);
     try {
       if (_sign_formkey.currentState.validate()) {
@@ -437,6 +425,7 @@ class _SignInPageState extends State<SignInPage> {
             "email": '$_email',
             "image": '$_userImage',
             "Mobile": '$_mobile',
+            "Date": '$_timeStamp',
           });
         } else {
           setState(() => active = false);
@@ -471,6 +460,7 @@ class _SignInPageState extends State<SignInPage> {
           password: password.text,
         )).user;
       }on FirebaseAuthException catch (e) {
+        print('Exceptions $e');
         if (e.code == 'weak-password') {
           print('The password provided is too weak.');
         } else if (e.code == 'email-already-in-use') {
@@ -534,7 +524,7 @@ class _SignInPageState extends State<SignInPage> {
         return AlertDialog(
           backgroundColor: Colors.white.withOpacity(0.9),
           title: Text('Verification',style: TextStyle(color: Colors.black),),
-          content: Text("verification link send on your email please verify first Then Back to log in",style: TextStyle(fontSize: 18.0,color: Colors.black),),
+          content: Text("verification link send on $_email              please verify first Then Back to log in",style: TextStyle(fontSize: 18.0,color: Colors.black),),
           actions: [
             TextButton(
               onPressed: () async {

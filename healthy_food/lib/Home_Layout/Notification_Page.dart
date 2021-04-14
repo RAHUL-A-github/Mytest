@@ -11,10 +11,12 @@ class _NotificationspageState extends State<Notificationspage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: Colors.white,
+
       appBar: AppBar(
         centerTitle: true,
-        backgroundColor: Colors.black,
+        backgroundColor: Colors.black.withOpacity(0.2),
+        elevation: 5.0,
         leading: IconButton(
           onPressed: () {
             Navigator.of(context).pop();
